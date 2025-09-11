@@ -1,0 +1,203 @@
+<div class="page-banner">
+  <%= image_tag "headerイメージ.jpg", class: "banner-image" %>
+</div>
+<h3>Tweet一覧</h3>
+
+<h3>投稿を検索</h3>
+<%= form_tag({controller: "tweets", action: "index"}, method: :get, class: "search-form") do %>
+  <!-- 上段：検索文字列 -->
+  <div class="search-row">
+    <%= text_field_tag :search, params[:search], placeholder: "キーワードで検索", class: "search-input" %>
+  </div>
+
+  <!-- 下段：セレクトボックス2つ＋検索ボタン -->
+  <div class="filter-row">
+    <%= select_tag :active_years, 
+      options_for_select([
+        ["1年未満", "0-1"],
+        ["1〜4年未満", "1-4"],
+        ["4〜10年未満", "4-10"],
+        ["10年以上", "10+"]
+      ], params[:active_years]),
+      include_blank: "活動年数で絞り込み",
+      class: "filter-select" %>
+
+    
+    <%= select_tag :category,
+      options_for_select([
+          ["画像", "image"],
+          ["動画", "video"],
+          ["音楽", "music"]
+        ], params[:category]),
+      include_blank: "メディアで絞り込み",
+      class: "filter-select",
+      onchange: "this.form.submit();" %>
+
+    <%= submit_tag '検索する', class: "search-button" %>
+  </div>
+<% end %>
+
+
+
+<h2>最近投稿された動画</h2>
+<div class="recent-videos">
+  <% @recent_videos.each do |t| %>
+    <% if (youtube_id = find_youtube_url(t.youtube_url)) %>
+      <div class="video-card">
+      <div class="video-user">
+          <% if t.user.profile_image.attached? %>
+            <%= image_tag t.user.profile_image, size: '40x40', class: "profile-icon" %>
+          <% end %>
+          <%= link_to t.user.name, user_path(t.user), class: "profile-name" %>
+        </div>
+        <iframe width="250" height="150"
+          src="https://www.youtube.com/embed/<%= youtube_id %>"
+          frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<h2>人気の投稿</h2>
+<div class="rank-tweets">
+  <% @rank_tweets.each do |t| %>
+    <div class="rank-card">
+
+      <!-- プロフィール画像＋名前 -->
+      <div class="rank-user">
+        <% if t.user.profile_image.attached? %>
+          <%= image_tag t.user.profile_image, size: '40x40', class: "profile-icon" %>
+        <% end %>
+        <%= link_to t.user.name, user_path(t.user), class: "profile-name" %>
+      </div>
+
+      <!-- 投稿内容（動画 / 画像 / テキスト） -->
+      <% if (youtube_id = find_youtube_url(t.youtube_url)) %>
+        <iframe width="250" height="150"
+          src="https://www.youtube.com/embed/<%= youtube_id %>"
+          frameborder="0" allowfullscreen>
+        </iframe>
+      <% elsif t.image.attached? %>
+        <%= image_tag t.image, size: "250x150", class: "rank-image" %>
+      <% else %>
+        <p class="rank-text"><%= truncate(t.body, length: 50) %></p>
+      <% end %>
+
+      <!-- いいね数 -->
+      <span class="like-count">❤️ <%= t.likes.count %></span>
+    </div>
+  <% end %>
+</div>
+
+<div class="main-container">
+  <!-- 左：カレンダー -->
+  <div class="calendar-section">
+    <h1>投稿カレンダー</h1>
+    <%= month_calendar(events: @tweets, date_method: :created_at, start_day: :mon) do |date, tweets| %>
+      <div class="day">
+        <div class="date"><%= date.day %></div>
+        <strong><%= tweets.count %></strong>
+      </div>
+    <% end %>
+  </div>
+
+  
+<div class="tweets-container">
+  <h2>最新の投稿</h2>
+  <% @tweets.each do |t| %>
+    <div class="tweet">
+
+      <!-- プロフィール画像と名前 -->
+      <div class="tweet-user">
+        <% if t.user.profile_image.attached? %>
+          <%= image_tag t.user.profile_image, size: '50x50', class: "profile-icon" %>
+        <% end %>
+        <%= link_to t.user.name, user_path(t.user.id), class: "profile-name" %>
+      </div>
+
+      <!-- 投稿本文 -->
+      <div class="tweet-body">
+        <%= t.body %>
+      </div>
+
+      <div class="media-wrapper">
+  <!-- 投稿画像 -->
+  <% if t.image.attached? %>
+    <%= image_tag t.image, class: "media-content" %>
+  <% end %>
+
+  <!-- 投稿動画 -->
+  <% if (youtube_id = find_youtube_url(t.youtube_url)) %>
+    <iframe
+      class="media-content"
+      src="https://www.youtube.com/embed/<%= youtube_id %>"
+      frameborder="0" allowfullscreen>
+    </iframe>
+  <% end %>
+</div>
+  
+<!-- いいねボタン -->
+      <div class="tweet-likes">
+        <% if user_signed_in? %>
+          <% if current_user.already_liked?(t) %>
+            <%= button_to tweet_like_path(t, t.likes.find_by(user: current_user)),
+                          method: :delete,
+                          params: { return_to: request.fullpath },
+                          class: "like-button" do %>
+              <i class="fas fa-heart liked"></i>
+            <% end %>
+          <% else %>
+            <%= button_to tweet_likes_path(t),
+                          method: :post,
+                          params: { return_to: request.fullpath },
+                          class: "like-button" do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+          <span class="like-count"><%= t.likes.count %></span>
+        <% else %>
+          <i class="far fa-heart"></i>
+          <span class="like-count"><%= t.likes.count %></span>
+        <% end %>
+      </div>
+
+
+      <!-- フッター -->
+<div class="tweet-footer">
+  <p class="time">
+    <%= t.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M") %>
+  </p>
+
+  <div class="action-buttons-footer">
+
+  <!-- コメントボタン -->
+<div class="comment-button">
+  <a href="#" class="open-comment-modal" data-tweet-id="<%= t.id %>" data-from="home">
+    <i class="far fa-comments"></i>
+    <span id="comment_count_<%= t.id %>"><%= t.comments.size %></span>
+  </a>
+</div>
+
+
+<% if user_signed_in? && current_user.id == t.user_id %>
+      <%= link_to tweet_path(t), class: "btn-detail" do %>
+        <i class="fas fa-sticky-note"></i> 詳細
+      <% end %>
+
+      <%= button_to tweet_path(t),
+      method: :delete,
+      class: "btn-delete",
+      onclick: "return confirm('本当に削除しますか？');" do %>
+  <i class="fas fa-trash-alt"></i> 削除
+<% end %>
+
+    </div>
+  <% end %>
+</div> <!-- /.tweet-footer -->
+<% end %>
+
+<br>
+<br>
+
+

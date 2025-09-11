@@ -1,0 +1,38 @@
+/* 編集リンクと「いいねしたユーザー」の間隔調整 */
+.edit-tweet-link {
+  display: inline-block;
+  margin-bottom: 20px; /* 下に余白をつける */
+}
+
+.profile-icon {
+  border-radius: 50%;
+  vertical-align: middle; /* これでテキストと中央揃え */
+  display: inline-block;  /* inline要素扱いにして vertical-align を効かせる */
+  margin-right: 8px;      /* ユーザーネームとの間隔 */
+}
+
+.btn-edit,
+.btn-logout {
+  display: inline-block;  /* 横幅を必要分だけ */
+  text-align: left;       /* テキストも左寄せ */
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.btn-logout {
+  display: inline-block;  /* 必要な幅だけ */
+  color: blue;
+  text-align: left;       /* 中の文字も左寄せ */
+}
+
+.liked-users-title {
+  margin-top: 20px;   /* 上に余白 */
+  margin-bottom: 15px; /* 下に余白 */
+}
+
+.comments-list {
+  margin-top: 25px;   /* コメント一覧の前に余白 */
+}
+
+

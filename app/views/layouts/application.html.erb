@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AstraShare</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/c894341915.js"  crossorigin="anonymous"></script>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>   <!-- ★ ここを追加 -->
+    </head>
+
+  <body>
+     <header>
+      <h1>AstraShare</h1>
+      <div class="header-list">
+      <ul>
+        <li><%= link_to "Home", tweets_path %></li>
+        <li><%= link_to "New Tweet",new_tweet_path %></li>
+      <% if user_signed_in? %>
+          <%= link_to "My Page", user_path(current_user.id) %>
+      <% end %>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>Copyright © GeekSalon All Rights Reserved.</p>
+    </footer>
+
+<div id="comment-modal" class="modal hidden">
+  <div class="modal-overlay"></div>
+      <button class="modal-close">×</button> <!-- ← 外に出す -->
+      
+  <div class="modal-content">
+    <div id="comment-modal-body">
+      <!-- fetchでコメント一覧とフォームがここに挿入される -->
+    </div>
+  </div>
+</div>
+
+
+<style>
+.modal.hidden { display: none; }
+.modal { position: fixed; top:0; left:0; width:100%; height:100%; z-index:999; }
+.modal-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
+.modal-content { position:relative; width:500px; margin:50px auto; background:white; padding:20px; border-radius:8px; }
+.modal-close { position:absolute; top:10px; right:10px; font-size:20px; cursor:pointer; }
+</style>
+
+
+  </body>
+</html>

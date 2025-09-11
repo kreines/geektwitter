@@ -1,0 +1,15 @@
+<%= form_for @tweet do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body, :size => 140 %> 
+  <br>
+    <%= f.label :youtube_url, "YouTube URL" %>
+    <%= f.text_field :youtube_url, size: 140 %>
+
+    <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+    <%= f.select :category, [["音楽", "music"], ["動画", "video"]], include_blank: "どの投稿？" %>
+  <%= f.submit "編集する" %>
+<% end %>

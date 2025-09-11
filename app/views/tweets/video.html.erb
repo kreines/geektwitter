@@ -1,0 +1,6 @@
+<h1>YouTube込み投稿</h1>
+<% @Tweets.each do |t| %>
+  <% if t.category == "video" %>  
+  <p>内容:<%= t.content %></p>
+  <% end %>
+<% end %>

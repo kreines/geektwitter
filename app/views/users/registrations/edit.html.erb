@@ -1,0 +1,100 @@
+<%= stylesheet_link_tag 'edit', :media => "all" %>
+
+<h2>ユーザー編集</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <!-- 名前 -->
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <!-- メールアドレス -->
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <!-- パスワード変更 -->
+  <div class="field">
+    <%= f.label :password,"パスワード" %> <i>(変更したい場合のみ)</i><br />
+    <%= f.text_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br>
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+ <div class="field">
+  <%= f.label :password_confirmation, "パスワード（確認用）" %><br />
+  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+</div>
+
+<div class="field">
+  <%= f.label :current_password, "現在のパスワード" %><br />
+  <%= f.text_field :current_password, autocomplete: "current-password" %>
+  <small class="text-muted">※変更内容を保存するには現在のパスワードが必要です</small>
+</div>
+
+  <!-- プロフィール文 -->
+  <div class="field">
+  <%= f.label :profile, "プロフィール文" %><br>
+  <%= f.text_area :profile, rows: 5, maxlength: 300 %>
+  <p class="char-count">最大300文字まで</p>
+</div>
+
+  <!-- 画像アップロード -->
+  <div class="field">
+    <%= f.label :profile_image, "プロフィール画像" %><br>
+    <%= f.file_field :profile_image %>
+  </div>
+
+  <!-- SNS入力欄 -->
+  <div class="field">
+    <%= f.label :x_url, "X (旧Twitter) URL" %><br>
+    <%= f.text_field :x_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :instagram_url, "Instagram URL" %><br>
+    <%= f.text_field :instagram_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facebook_url, "Facebook URL" %><br>
+    <%= f.text_field :facebook_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :youtube_url, "YouTube URL" %><br>
+    <%= f.text_field :youtube_url %>
+  </div>
+
+  <div class="actions">
+  <%= f.submit "Update" %>
+</div>
+<% end %>
+
+<%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary" %>
+
+<hr>
+
+<div class="account-cancel-section">
+  <p class="text-danger font-bold">
+    ※アカウントを削除すると、登録データや投稿内容は復元できません。<br>
+    本当に削除したい場合のみ、下のボタンを押してください。
+  </p>
+
+  <%= button_to "Cancel my account",
+      registration_path(resource_name),
+      method: :delete,
+      class: "btn btn-danger mt-2",
+      onclick: "return confirm('本当にアカウントを削除しますか？（削除すると復元できません）');" %>
+
+<br>
+<br>
+<br>
+<br>
+

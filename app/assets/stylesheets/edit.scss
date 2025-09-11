@@ -1,0 +1,39 @@
+
+  .field {
+    width: 300px;
+    margin-bottom: 10px; /* ラベルとの間隔はこれで確保 */
+  }
+
+  /* input / password / email / file など */
+.field input,
+  .field select {
+    width: 100%;
+    height: 40px;        /* 入力欄だけ高さ固定 */
+    padding: 6px 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #f0f0f0; /* ← ここで灰色に */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  /* プロフィール文（textarea）は個別で高さ広め） */
+  .field textarea {
+    width: 100%;
+    max-width: 300px;
+    min-height: 80px;
+    padding: 6px 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* ← ここで灰色に */
+    border: 1px solid #ccc;
+  }
+
+  small.text-muted {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+  }
+

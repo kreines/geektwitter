@@ -1,0 +1,29 @@
+.liked {
+  color: red;
+}
+.far.fa-heart {
+  color: gray;
+}
+
+.tweet-likes {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* ハートと数字の間の余白 */
+}
+
+.like-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.like-button i {
+  font-size: 20px;
+}
+
+.like-count {
+  font-size: 14px;
+  color: #333;
+}
+

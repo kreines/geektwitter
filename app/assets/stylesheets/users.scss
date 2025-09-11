@@ -1,0 +1,151 @@
+.user-profile-page {
+  text-align: center;
+  margin: 30px auto;
+  max-width: 600px;
+}
+
+.user-name {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.user-bio {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.user-socials a {
+  font-size: 24px;
+  color: #333;
+  margin: 0 10px;
+  transition: color 0.2s;
+}
+
+.user-socials a:hover {
+  color: #00acee; /* ホバー時の色 */
+}
+
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+/* ボタン系 */
+.btn-edit{display: inline-block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  color:#fff;
+  background-color: #00acee;
+  font-size: 0.85rem;}
+
+
+.btn-detail,
+.btn-delete {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: gray;
+  background-color: #fff;
+  font-size: 0.85rem;
+}
+
+.user-page-container {
+  display: flex;
+  gap: 20px;
+}
+
+.user-left {
+  flex: 2; /* 左2割 */
+  max-width: 20%;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.user-right {
+  flex: 8; /* 右8割 */
+  max-width: 80%;
+}
+
+.profile-img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* --- 投稿部分 --- */
+.tweets-container {
+  display: flex;
+  flex-direction: column; /* 上から下に並べる */
+  gap: 20px;              /* 投稿間の余白 */
+}
+
+.tweet-card {
+  display: flex;
+  flex-direction: column; /* ← 縦積みに修正 */
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 本文 + 画像/動画 横並び */
+.tweet-body-media {
+  display: flex;
+  gap: 20px;
+}
+
+.tweet-left {
+  flex: 3;
+}
+
+.tweet-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tweet-right img,
+.tweet-right iframe,
+.tweet-right video {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* YouTube埋め込みをレスポンシブに */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9比率 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* フッター（常に下に） */
+.tweet-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.action-buttons-footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+

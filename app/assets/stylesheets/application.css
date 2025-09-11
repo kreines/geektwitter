@@ -1,0 +1,216 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ * {
+  padding: 0;
+  margin: 0;
+}
+body {
+   min-height: 100vh;
+  position: relative; 
+  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+    Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+}
+header {
+  background-color: #00acee;
+  height: 80px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header a {
+  color: white; 
+  text-decoration: none; 
+}
+header h1 {
+  color: white;
+  margin-left: 20px;
+}
+.header-list {
+  display: flex;
+  align-items: center;
+}
+header ul {
+  display: flex;
+}
+header li {
+  list-style: none;
+  margin-right: 40px;
+}
+
+footer {
+  color: white;
+  height: 30px;
+  background-color: #000;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: flex-end;
+}
+
+.right-container {
+  display: flex;
+  gap: 10px; /* ボタンの間隔 */
+}
+
+.right-container form {
+  margin: 0; /* ボタンの余白をリセット（特にbutton_toで生成されるformタグ） */
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+}
+
+.btn-link:hover {
+  background-color: #4a3cc1;
+}
+
+.btn-link:visited {
+  color: white;
+}
+
+@import "simple_calendar"; 
+@import "index";           
+
+.day {
+  border: 1px solid #000000;
+  width: 50px;
+}
+
+.month_calendar {
+  width: 80%;
+  margin: 1px auto;
+  border-collapse: collapse;
+  background-color: #fff; /* 背景を白に */
+  border: 1px solid #000; /* 表全体の枠線 */
+}
+
+@import "users";
+
+/* モーダル全体（非表示時は .hidden で消す） */
+.modal.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 背景のグレーオーバーレイ */
+.modal-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+/* モーダルの中身 */
+.modal-content {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  z-index: 1001;
+}
+
+/* 閉じるボタン */
+
+.modal-close {
+  position: absolute;
+  top: -8px;   /* 枠から少し上に出す */
+  right: -8px; /* 枠から少し右に出す */
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fefefe;
+  cursor: pointer;
+}
+
+/* ===== コメントフォーム追加 ===== */
+/* モーダル内コメントフォーム */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-textarea {
+  width: 100% !important;
+  min-height: 100px !important;
+  border: 2px solid black !important;
+}
+
+/* 送信ボタンを右下に固定 */
+.comment-actions {
+  position: absolute;
+  bottom: 20px;  /* モーダル下端から20px */
+  right: 20px;   /* モーダル右端から20px */
+}
+
+.comment-submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.comment-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.liked-users-title {
+  margin-bottom: 20px; /* いいねユーザーのタイトル下に余白を作る */
+}
+
+.comments-title {
+  margin-top: 40px; /* コメントタイトルの上に余白を作る */
+  margin-bottom: 15px; /* コメントタイトル下にも少し余白 */
+}
+
+.comments-list {
+  margin-top: 10px; /* コメントリスト全体の上に少し余白 */
+}

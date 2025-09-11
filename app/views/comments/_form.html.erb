@@ -1,0 +1,20 @@
+<%= form_with(model: [tweet, comment], local: true, class: "comment-form") do |f| %>
+  <%= hidden_field_tag :from, from %> <!-- 共通で1回書けばOK -->
+
+  <div>
+    <%= f.text_area :content, rows: 3, placeholder: "コメントを入力...", required: true %>
+  </div>
+  <div>
+    <%= f.submit "送信", class: "btn-submit" %>
+  </div>
+<% end %>
+
+  <div class="comments-list">
+    <% tweet.comments.each do |c| %>
+      <p><strong><%= c.user.name %>:</strong> <%= c.content %></p>
+    <% end %>
+  </div>
+<% end %>
+
+
+

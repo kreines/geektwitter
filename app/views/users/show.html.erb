@@ -1,0 +1,145 @@
+<div class="page-banner">
+  <%= image_tag "headerイメージ.jpg", class: "banner-image" %>
+</div>
+
+<div class="user-page-container">
+
+  <!-- 左カラム（プロフィール部分） -->
+  <div class="user-left">
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image, size: '200x200', class: "profile-img" %>
+    <% end %>
+
+    <h1 class="user-name"><%= @user.name %></h1>
+    <p class="user-bio"><%= @user.profile.presence || "プロフィールは未設定です" %></p>
+
+    <div class="user-socials">
+      <% if @user.x_url.present? %>
+        <%= link_to @user.x_url, target: "_blank" do %>
+          <i class="fab fa-twitter"></i>
+        <% end %>
+      <% end %>
+      <% if @user.instagram_url.present? %>
+        <%= link_to @user.instagram_url, target: "_blank" do %>
+          <i class="fab fa-instagram"></i>
+        <% end %>
+      <% end %>
+      <% if @user.facebook_url.present? %>
+        <%= link_to @user.facebook_url, target: "_blank" do %>
+          <i class="fab fa-facebook"></i>
+        <% end %>
+      <% end %>
+      <% if @user.youtube_url.present? %>
+        <%= link_to @user.youtube_url, target: "_blank" do %>
+          <i class="fab fa-youtube"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if current_user.id == @user.id %>
+      <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn-edit" %>
+    <%= link_to "ログアウト", destroy_user_session_path,
+                data: { turbo_method: :delete, confirm: "ログアウトしますか？" },
+                class: "btn-logout" %>
+    <% end %>
+  </div>
+
+<div class="user-right">
+  <h2>投稿一覧</h2>
+  <div class="tweets-container">
+     <% @tweets.each do |t| %>
+    <div class="tweet">
+
+      <!-- プロフィール画像と名前 -->
+      <div class="tweet-user">
+        <% if t.user.profile_image.attached? %>
+          <%= image_tag t.user.profile_image, size: '50x50', class: "profile-icon" %>
+        <% end %>
+        <%= link_to t.user.name, user_path(t.user.id), class: "profile-name" %>
+      </div>
+
+      <!-- 投稿本文 -->
+      <div class="tweet-body">
+        <%= t.body %>
+      </div>
+
+      <div class="media-wrapper">
+  <!-- 投稿画像 -->
+  <% if t.image.attached? %>
+    <%= image_tag t.image, class: "media-content" %>
+  <% end %>
+
+  <!-- 投稿動画 -->
+  <% if (youtube_id = find_youtube_url(t.youtube_url)) %>
+    <iframe
+      class="media-content"
+      src="https://www.youtube.com/embed/<%= youtube_id %>"
+      frameborder="0" allowfullscreen>
+    </iframe>
+  <% end %>
+</div>
+
+
+      <!-- いいねボタン -->
+      <div class="tweet-likes">
+        <% if user_signed_in? %>
+          <% if current_user.already_liked?(t) %>
+            <%= button_to tweet_like_path(t, t.likes.find_by(user: current_user)),
+                          method: :delete,
+                          params: { return_to: request.fullpath },
+                          class: "like-button" do %>
+              <i class="fas fa-heart liked"></i>
+            <% end %>
+          <% else %>
+            <%= button_to tweet_likes_path(t),
+                          method: :post,
+                          params: { return_to: request.fullpath },
+                          class: "like-button" do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+          <span class="like-count"><%= t.likes.count %></span>
+        <% else %>
+          <i class="far fa-heart"></i>
+          <span class="like-count"><%= t.likes.count %></span>
+        <% end %>
+      </div>
+
+      <!-- フッター -->
+<div class="tweet-footer">
+  <p class="time">
+    <%= t.created_at.in_time_zone('Tokyo').strftime("%Y/%m/%d %H:%M") %>
+  </p>
+
+  <div class="action-buttons-footer">
+  <!-- コメントボタン -->
+  <div class="comment-button">
+  <a href="#" class="open-comment-modal" data-tweet-id="<%= t.id %>" data-from="mypage">
+    <i class="far fa-comments"></i>
+    <span id="comment_count_<%= t.id %>"><%= t.comments.size %></span>
+  </a>
+  </div>
+
+
+<%= turbo_frame_tag "comments_#{t.id}" %>
+  <!-- 初期状態では空。クリックしたらここにコメント一覧 + フォームが差し込まれる -->
+
+
+  <% if user_signed_in? && current_user.id == t.user_id %>
+      <%= link_to tweet_path(t), class: "btn-detail" do %>
+        <i class="fas fa-sticky-note"></i> 詳細
+      <% end %>
+
+      <%= button_to tweet_path(t),
+      method: :delete,
+      class: "btn-delete",
+      onclick: "return confirm('本当に削除しますか？');" do %>
+  <i class="fas fa-trash-alt"></i> 削除
+<% end %>
+
+    </div>
+  <% end %>
+</div> <!-- /.tweet-footer -->
+<% end %>
+
+

@@ -1,0 +1,309 @@
+.page-banner {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.banner-image {
+  width: 100%;          /* 横幅を画面の80%に制限 */
+  height: 250px;       /* 固定の高さを指定 */
+  object-fit: cover;   /* 画像をトリミングして枠に収める */
+  display: block;      /* margin auto が効くように block にする */
+  margin: 0 auto;      /* 中央寄せ */
+}
+
+.profile-icon {
+  border-radius: 50%;
+  vertical-align: middle; /* これでテキストと中央揃え */
+  display: inline-block;  /* inline要素扱いにして vertical-align を効かせる */
+  margin-right: 8px;      /* ユーザーネームとの間隔 */
+}
+
+.search-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;}
+
+  .search-row {
+    margin-bottom: 10px;}
+
+    .search-input {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  
+
+  .filter-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center; /* 縦中央揃え */
+}
+
+.filter-select {
+  height: 40px;          /* 高さを統一 */
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.search-button {
+  height: 40px;          /* セレクトと同じ高さ */
+  line-height: 1.2;      /* テキスト中央揃え */
+  padding: 0 12px;       /* 横パディングだけ */
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+
+.tweets-container {
+  width: 50%;
+  margin: 10px auto;
+}
+h3 {
+  width: 100px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.tweet {
+  border-top: solid #00acee;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+
+.main-box {
+  display: flex;
+  justify-content: space-between; /* 左右に分ける */
+}
+
+.left-container {
+  flex: 1; /* 左側が残り幅を取る */
+  padding-right: 10px;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column; /* 縦に積む */
+  justify-content: flex-end; /* 下に寄せる */
+  align-items: flex-end;    /* 右寄せ */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end; /* 右寄せ */
+  align-items: center;       /* 垂直方向中央揃え */
+  gap: 10px;                 /* ボタン間の余白 */
+  margin-top: 5px;        /* 上余白 */
+}
+
+.action-buttons-footer i {
+  margin-right: 5px;       /* アイコンと文字の間隔 */
+  vertical-align: middle;  /* アイコンを文字の中央に揃える */
+}
+
+.action-buttons-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* ← 好きな数値で調整。全アイコンの間隔が均等になる */
+}
+
+.action-buttons-footer form {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* コメントボタン内のアイコンとカウントをグレーに */
+.comment-button i,
+.comment-button span {
+  color: #888;  /* 灰色 */
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.btn-comment,
+.btn-detail,
+.btn-delete {
+  display: inline-flex;       /* アイコンと文字を横並び */
+  align-items: center;        /* 縦方向の位置を中央に揃える */
+  gap: 4px;                   /* アイコンと文字の間隔を統一 */
+  
+  background: none;           /* 背景なし */
+  border: none;               /* 枠なし */
+  cursor: pointer;            /* ホバーでポインタ */
+  color: gray;                /* 文字色 */
+  font-size: 14px;
+  line-height: 1.4;           /* 行間を自然に */
+  padding: 2px 6px;           /* クリック範囲を少し広めに */
+}
+
+.time {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-row {
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.filter-select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.media-wrapper {
+  display: flex;
+  gap: 10px;        /* 画像と動画の間の余白 */
+  align-items: flex-start; /* 上揃え */
+}
+
+.media-content {
+  width: 350px;     /* 横幅を統一 */
+  height: 250px;    /* 高さを統一 */
+  object-fit: cover; /* 画像は枠に合わせてトリミング */
+  border-radius: 8px; /* 任意：角丸 */
+}
+
+
+.search-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 4px;
+}
+
+.like-button .fas.fa-heart.liked {
+  color: red;  /* いいね済みは赤いハート */
+}
+
+.like-button .far.fa-heart {
+  color: #555; /* 未いいねはグレーのハート */
+}
+
+.like-count {
+  font-size: 14px;
+  color: #333;
+}
+
+.recent-videos {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+  scroll-snap-type: x mandatory; /* スワイプ感を強化 */
+}
+
+.video-card {
+  flex: 0 0 auto; /* 横に並ぶように固定幅にする */
+  scroll-snap-align: start;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.tweet-footer {
+  display: flex;
+  justify-content: space-between; /* 左に日時、右にボタン */
+  align-items: center;            /* 垂直中央揃え */
+  margin-top: 5px;
+}
+
+
+.rank-tweets {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;   /* 横スクロールのみ */
+  overflow-y: hidden; /* 縦方向は普通に流す */
+  padding: 10px;
+  white-space: nowrap; /* flexの代わりでも可 */
+}
+
+.rank-card {
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+.rank-image {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.rank-user {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.main-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* 上端を揃える */
+  padding-bottom: 50px; /* 下に余白を確保 */
+}
+
+/* 左カラム: 4割 */
+.calendar-section {
+  flex: 4;           /* 全体10とした場合4/10 */
+  max-width: 400px;  /* 必要に応じて幅調整 */
+  flex-shrink: 0;
+  overflow: visible; /* 中身が減っても切れない */
+}
+
+/* 右カラム: 6割 */
+.tweets-container {
+  flex: 6;           /* 全体10とした場合6/10 */
+  padding-bottom: 50px; /* 下に余白を確保 */
+}

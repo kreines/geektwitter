@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "comments_#{@tweet.id}" do %>
+  <%= render partial: "comments/comments_list",
+             locals: { tweet: @tweet, comment: Comment.new } %>
+<% end %>
+
+

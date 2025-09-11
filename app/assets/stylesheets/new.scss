@@ -1,0 +1,115 @@
+/* ====== 全体のフォーム枠 ====== */
+.post-container {
+  margin: 50px auto;
+  width: 50%;
+  border: solid #d3def1;
+  border-radius: 10px;
+  background-color: #d3def1;
+  padding: 30px;
+  text-align: center; /* フォーム全体は中央寄せ */
+}
+
+/* ====== タイトル ====== */
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+/* ====== 入力フォーム ====== */
+input[type="text"]{
+  width: 95%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 20px;
+  background-color: #ccc;
+}
+
+
+input[type="file"] {
+  width: 95%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 20px;
+  background-color: #d3def1;
+}
+
+input[type="submit"] {
+  width: 200px;
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+/* ====== トグル部分 ====== */
+.form-group {
+  text-align: left;   /* ← ここで左寄せにする */
+  margin: 20px 0;
+}
+
+.toggle-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-right: 10px; /* テキストとの間隔 */
+  vertical-align: middle;
+}
+
+.toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: background-color 0.3s;
+}
+
+.toggle-label::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #4caf50;
+}
+
+.toggle-checkbox:checked + .toggle-label::before {
+  transform: translateX(22px);
+}
+
+.category-field {
+  display: flex;
+  align-items: center;   /* ラベルとセレクトを縦中央にそろえる */
+  gap: 8px;              /* ラベルとセレクトの間隔 */
+}
+
+.category-select {
+  margin-left: 0;        /* 強制的に左寄せ */
+}
+
+
+/* 完成・未完成の文字 */
+#completed-status {
+  font-weight: bold;
+  margin-left: 10px;
+}

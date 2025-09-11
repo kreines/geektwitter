@@ -1,0 +1,6 @@
+<h1>音楽系投稿</h1>
+<% @Tweets.each do |t| %>
+  <% if t.category == "music" %> 
+  <p>内容:<%= t.content %></p>
+  <% end %>
+<% end %>

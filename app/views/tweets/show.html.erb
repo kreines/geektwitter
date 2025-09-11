@@ -1,0 +1,81 @@
+<h3>Tweet詳細</h3>
+<div class="tweet">
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %></p>
+
+  <% if @tweet.youtube_url.present? || @tweet.image_url.present? %>
+  <div class="tweet-media">
+    <% if @tweet.youtube_url.present? %>
+      <iframe width="30%" height="30%"
+              src="https://www.youtube.com/embed/<%= find_youtube_url(@tweet.youtube_url) %>"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+    <% end %>
+
+    <% if @tweet.image_url.present? %>
+      <%= image_tag @tweet.image_url, alt: "投稿画像", class: "tweet-image" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="tweet-likes">
+  <% if user_signed_in? %>
+    <% like = current_user.likes.find_by(tweet_id: @tweet.id) %>
+    <% if like %>
+      <%= button_to tweet_like_path(@tweet, like),
+                    method: :delete,
+                    params: { return_to: request.fullpath },
+                    class: "like-button" do %>
+        <i class="fas fa-heart liked"></i>
+      <% end %>
+    <% else %>
+      <%= button_to tweet_likes_path(@tweet),
+                    method: :post,
+                    params: { return_to: request.fullpath },
+                    class: "like-button" do %>
+        <i class="far fa-heart"></i>
+      <% end %>
+    <% end %>
+    <span class="like-count"><%= @tweet.likes.count %></span>
+  <% else %>
+    <i class="far fa-heart"></i>
+    <span class="like-count"><%= @tweet.likes.count %></span>
+  <% end %>
+</div>
+
+ <%= link_to "編集する", edit_tweet_path(@tweet.id), class: "edit-tweet-link" %>
+
+<h2 class="liked-users-title">いいねしたユーザー</h2>
+<% @tweet.liked_users.each do |user| %>
+  <li><%= user.name %></li>
+<% end %>
+
+<!-- コメント一覧 -->
+<h2 class="comments-title">コメント</h2>
+<div class="comments-list">
+  <% @tweet.comments.each do |comment| %>
+  <div class="comment">
+    <!-- プロフィール画像と名前 -->
+    <div class="comment-user">
+      <% if comment.user&.profile_image&.attached? %>
+        <%= image_tag comment.user.profile_image, size: '50x50', class: "profile-icon" %>
+      <% end %>
+      <strong><%= comment.user&.name || "profile-name" %></strong>
+    </div>
+
+    <!-- コメント内容 -->
+    <div class="comment-content">
+      <p><%= comment.content %></p>
+      <small><%= comment.created_at.in_time_zone("Asia/Tokyo").strftime("%Y/%m/%d %H:%M") %></small>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "Tweet一覧に戻る", tweets_path %>
+
+<br>
+<br>
+<br>

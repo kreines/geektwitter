@@ -1,0 +1,45 @@
+
+<%= stylesheet_link_tag 'new', :media => "all" %>
+
+<div class="post-container">
+    <p class="title">投稿フォーム</p>
+    <%= form_for(@tweet, :url => { controller:'tweets', action:'create'})do |f| %>
+    <%= f.label :投稿内容 %>
+        <br>
+        <%= f.text_field :body,size: 140%>
+        <br>
+    <%= f.label :youtube_url, "YouTube URL" %>
+    <%= f.text_field :youtube_url, size: 140 %>
+
+    <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="form-group category-field">
+  <%= f.label :category, "投稿カテゴリ" %>
+  <%= f.select :category, [["画像", "image"], ["動画", "video"], ["音楽", "music"]],
+               include_blank: "どの投稿？",
+               class: "category-select" %>
+</div>
+
+
+
+<div class="form-group">
+  <%= f.label :completed, "完成版か未完成か" %>
+  <div class="toggle-wrapper">
+    <%= f.check_box :completed, class: "toggle-checkbox", id: "completed-toggle" %>
+    <label for="completed-toggle" class="toggle-label"></label>
+  </div>
+  <span id="completed-status">
+  <%= f.object.completed? ? "完成" : "未完成" %>
+  </span>
+
+</div>
+
+<%= f.submit "投稿" %>
+  <br>
+    <% end %>
+
+
+</div>
