@@ -61,7 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'sass-rails'
 
-gem 'simple_calendar', '~> 2.0'
+gem 'simple_calendar', '~> 3.1'
 gem 'dotenv-rails'
 
 gem 'cloudinary'
