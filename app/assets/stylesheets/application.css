@@ -98,7 +98,7 @@ footer {
   color: white;
 }
 
-@import "index";           
+         
 
 .day {
   border: 1px solid #000000;
@@ -113,7 +113,7 @@ footer {
   border: 1px solid #000; /* 表全体の枠線 */
 }
 
-@import "users";
+
 
 /* モーダル全体（非表示時は .hidden で消す） */
 .modal.hidden {
