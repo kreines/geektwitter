@@ -261,8 +261,8 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    simple_calendar (2.4.3)
-      rails (>= 3.0)
+    simple_calendar (3.1.0)
+      rails (>= 6.1)
     spring (4.4.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
@@ -328,7 +328,7 @@ DEPENDENCIES
   rails (~> 7.2.2, >= 7.2.2.1)
   sass-rails
   selenium-webdriver (>= 4.0.0.rc1)
-  simple_calendar (~> 2.0)
+  simple_calendar (~> 3.1)
   spring
   sprockets-rails
   sqlite3
