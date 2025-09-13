@@ -27,23 +27,34 @@
 </div>
 
 <!-- 1. 一般 or クリエイター -->
+<div data-controller="creator-fields">
   <div class="field">
     <%= f.label :role, "アカウントタイプ" %><br />
-    <%= f.select :role, [["一般", "general"], ["クリエイター", "creator"]], prompt: "選択してください" %>
+    <%= f.select :role,
+                 [["一般", "general"], ["クリエイター", "creator"]],
+                 prompt: "選択してください",
+                 data: { "creator-fields-target": "role",
+                         action: "creator-fields#toggle" } %>
   </div>
 
-  <!-- 2. クリエイターの場合のみ表示する投稿タイプ -->
-  <div class="field creator-fields" style="display:none;">
+  <div class="field creator-fields"
+       data-creator-fields-target="creatorFields"
+       style="display:none;">
     <%= f.label :creator_type, "投稿タイプ" %><br />
-    <%= f.select :creator_type, [["画像", "image"], ["動画", "video"], ["音楽", "music"]], prompt: "選択してください" %>
+    <%= f.select :creator_type, [["画像", "image"], ["動画", "video"], ["音楽", "music"]],
+                 prompt: "選択してください" %>
   </div>
 
-  <!-- 3. 活動開始年（年だけ） -->
-<div class="field creator-fields" style="display:none;">
-  <%= f.label :started_at, "活動を始めた年" %><br>
-  <%= f.date_select :started_at, discard_day: true, discard_month: true, start_year: 1950, end_year: Date.today.year, include_blank: "選択してください" %>
+  <div class="field creator-fields"
+       data-creator-fields-target="creatorFields"
+       style="display:none;">
+    <%= f.label :started_at, "活動を始めた年" %><br>
+    <%= f.date_select :started_at,
+                      discard_day: true, discard_month: true,
+                      start_year: 1950, end_year: Date.today.year,
+                      include_blank: "選択してください" %>
+  </div>
 </div>
-
 
   <div class="actions">
     <%= f.submit "登録" %>

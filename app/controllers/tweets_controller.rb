@@ -12,10 +12,10 @@ class TweetsController < ApplicationController
     end
 
      # カテゴリーで絞り込み
-    if params[:media_tag].present?
-    @tweets = @tweets.where(media_tag: params[:category])
-  end
-
+    if params[:category].present?
+      @tweets = @tweets.where(category: params[:category])
+    end
+    
     # 活動年数での絞り込み
 if params[:active_years].present?
   today = Date.today

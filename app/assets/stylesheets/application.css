@@ -98,7 +98,6 @@ footer {
   color: white;
 }
 
-@import "simple_calendar"; 
 @import "index";           
 
 .day {

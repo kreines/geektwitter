@@ -67,6 +67,8 @@ gem 'dotenv-rails'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
+
+#group :production do
+  
+#end
